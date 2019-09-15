@@ -1,5 +1,8 @@
 package com.wix.reactnativenotifications;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
@@ -18,6 +21,7 @@ import com.wix.reactnativenotifications.core.notification.IPushNotification;
 import com.wix.reactnativenotifications.core.notification.PushNotification;
 import com.wix.reactnativenotifications.core.notificationdrawer.IPushNotificationsDrawer;
 import com.wix.reactnativenotifications.core.notificationdrawer.PushNotificationsDrawer;
+import com.wix.reactnativenotifications.core.JsIOHelper;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -29,6 +33,9 @@ import static com.wix.reactnativenotifications.Defs.LOGTAG;
 public class RNNotificationsPackage implements ReactPackage, AppLifecycleFacade.AppVisibilityListener, Application.ActivityLifecycleCallbacks {
 
     private final Application mApplication;
+
+    final protected JsIOHelper mJsIOHelper;
+    final protected AppLifecycleFacade mAppLifecycleFacade;
 
     public RNNotificationsPackage(Application application) {
         mApplication = application;
@@ -71,6 +78,12 @@ public class RNNotificationsPackage implements ReactPackage, AppLifecycleFacade.
                 if (pushNotification != null) {
                     pushNotification.onOpened();
                 }
+            } else {
+                final NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+                Array notifications = notificationManager.getActiveNotifications();
+
+                mJsIOHelper.sendEventToJs("allBackground", notifications.asBundle(), mAppLifecycleFacade.getRunningReactContext())
+
             }
         }
     }

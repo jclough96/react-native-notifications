@@ -24,6 +24,10 @@ export class NotificationsAndroid {
     notificationReceivedListener = DeviceEventEmitter.addListener("notificationReceived", (notification) => listener(new NotificationAndroid(notification)));
   }
 
+  static backgroundNotificationsListener(listener) {
+    backgroundNotificationsListener = DeviceEventEmitter.addListener("allBackground", (notifications) => listener(new NotificationAndroid(notifications)));
+  }
+
   static setNotificationReceivedInForegroundListener(listener) {
     notificationReceivedInForegroundListener = DeviceEventEmitter.addListener("notificationReceivedInForeground", (notification) => listener(new NotificationAndroid(notification)));
   }

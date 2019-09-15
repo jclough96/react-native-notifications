@@ -2,6 +2,7 @@ package com.wix.reactnativenotifications;
 
 import android.app.Activity;
 import android.app.Application;
+import andoird.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -76,6 +77,13 @@ public class RNNotificationsModule extends ReactContextBaseJavaModule implements
         Log.d(LOGTAG, "Native method invocation: refreshToken()");
         startGcmIntentService(FcmInstanceIdRefreshHandlerService.EXTRA_MANUAL_REFRESH);
     }
+
+//    @ReactMethod
+//    public void getAllActiveNotifications(Callback callback) {
+//        Log.d(LOGTAG, "getting background active notifications");
+//
+//
+//    }
 
     @ReactMethod
     public void getInitialNotification(final Promise promise) {
