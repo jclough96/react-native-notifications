@@ -82,7 +82,7 @@ public class RNNotificationsPackage implements ReactPackage, AppLifecycleFacade.
                 final NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
                 Array notifications = notificationManager.getActiveNotifications();
 
-                mJsIOHelper.sendEventToJs("allBackground", notifications.asBundle(), mAppLifecycleFacade.getRunningReactContext())
+                mJsIOHelper.sendEventToJs("allBackground", notifications.asBundle(), mAppLifecycleFacade.getRunningReactContext());
 
             }
         }
