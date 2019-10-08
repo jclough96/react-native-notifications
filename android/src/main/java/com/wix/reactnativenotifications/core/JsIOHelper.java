@@ -1,6 +1,7 @@
 package com.wix.reactnativenotifications.core;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
