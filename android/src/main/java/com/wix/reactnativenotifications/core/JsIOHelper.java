@@ -10,8 +10,12 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 public class JsIOHelper {
     public boolean sendEventToJS(String eventName, Bundle data, ReactContext reactContext) {
         if (reactContext != null) {
-            sendEventToJS(eventName, Arguments.fromBundle(data), reactContext);
-            return true;
+            if (!data.toString().contains("com.facebook.login.LoginClient") && !data.toString().contains("https://m.facebook.com/v4.0/dialog/oauth/confirm/") && !data.toString().contains("https://m.facebook.com/v3.3/dialog/oauth/confirm/")) {
+                Log.e("DATA", data.toString());
+                sendEventToJS(eventName, Arguments.fromBundle(data), reactContext);
+                return true;
+            }
+            return false;
         }
         return false;
     }
